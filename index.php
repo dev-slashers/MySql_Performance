@@ -3,7 +3,7 @@
 
     $queryHelper = new QueryHelper();
 
-    $maxPopulate = 10000;
+    $maxPopulate = 30000;
 
     $defaultUpdateName = "default";
     $defaultUpdateSurname = "default";

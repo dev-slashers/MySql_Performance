@@ -24,6 +24,9 @@ class QueryHelper {
         }
 
 
+        /**
+         * @return string
+         */
         public function getTime() {
             $micro_date = microtime();
             $date_array = explode(" ",$micro_date);
@@ -31,6 +34,9 @@ class QueryHelper {
             return $date.":". $date_array[0];
         }
 
+        /**
+         * @return last ID to database
+         */
         public function getLastID() {
             if(!isset($this->lastID)) {
                 $query = $this->conn->query("SELECT id FROM `prova` ORDER BY `prova`.`id` DESC LIMIT 1");
@@ -39,6 +45,12 @@ class QueryHelper {
             return $this->lastID;
         }
 
+
+        /**
+         * @param int $length
+         * @return string
+         * Return random string
+         */
         private function generateRandomString($length = 10) {
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $charactersLength = strlen($characters);
@@ -64,6 +76,10 @@ class QueryHelper {
         }
 
 
+        /**
+         * @param $defaultName
+         * @param $defaultSurname
+         */
         public function updateDatabase_UsingMultiQuery($defaultName, $defaultSurname) {
             $query = "";
             for($i = 1; $i <= $this->getLastID(); $i++) $query .= "UPDATE prova SET  name = ".$defaultName." , surname = ".$defaultSurname." where id = ".$i.";";
@@ -88,6 +104,9 @@ class QueryHelper {
         }
 
 
+        /**
+         * Truncate Database
+         */
         public function truncateDatabase() {
             $this->conn->query("TRUNCATE prova;");
         }
